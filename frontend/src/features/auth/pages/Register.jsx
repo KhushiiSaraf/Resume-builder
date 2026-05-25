@@ -1,0 +1,73 @@
+import {Link }from "react-router-dom";
+function Register() {
+    return (
+        <div className="relative min-h-screen flex items-center justify-center bg-[#0b0f19] px-4 overflow-hidden">
+
+            {/* glow wrapper */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute w-[400px] h-[400px] bg-indigo-600/20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
+                <div className="absolute w-[300px] h-[300px] bg-purple-600/20 blur-3xl rounded-full bottom-[-80px] right-[-80px]" />
+            </div>
+
+            {/* actual card */}
+            <div className="relative w-full max-w-md backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-2xl shadow-2xl">
+
+                <h2 className="text-2xl font-semibold text-gray-100 text-center mb-6">
+                    Create Account
+                </h2>
+
+                <form className="space-y-5">
+
+                    <div>
+                        <label className="block text-sm text-gray-400 mb-1">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Your name"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-gray-400 mb-1">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            placeholder="you@example.com"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-gray-400 mb-1">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="••••••••"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full py-2 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-[1px] active:scale-[0.98]    active:shadow-[0_0_10px_rgba(99,102,241,0.2)]"
+                    >
+                        Register
+                    </button>
+                </form>
+
+                <p className="text-sm text-gray-400 text-center mt-5">
+                    Already have an account?{" "}
+                    <span className="text-indigo-400 cursor-pointer hover:underline">
+                        <Link to="/login">Login</Link>
+                    </span>
+                </p>
+            </div>
+        </div>
+    );
+}
+
+export default Register;
