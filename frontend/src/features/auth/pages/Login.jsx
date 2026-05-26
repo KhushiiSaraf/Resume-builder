@@ -1,5 +1,21 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import LoadingSpinner from "../components/LoadingSpinner";
+
 function Login() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const { loading, error, handleLogin } = useAuth();
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        await handleLogin({ email, password });
+    }
+
+    //could show loading spinner here while checking auth status
 
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-[#0b0f19] px-4 overflow-hidden">
@@ -16,7 +32,7 @@ function Login() {
                     Welcome Back
                 </h2>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={(e) => onSubmit(e)}>
 
                     <div>
                         <label className="block text-sm text-gray-400 mb-1">
@@ -25,6 +41,9 @@ function Login() {
                         <input
                             type="email"
                             placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
                             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                         />
                     </div>
@@ -36,15 +55,23 @@ function Login() {
                         <input
                             type="password"
                             placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            name="password"
                             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                         />
                     </div>
+                    {error && (
+                        <div className="text-red-500 text-sm text-center">
+                            {error}
+                        </div>
+                    )}
 
                     <button
                         type="submit"
                         className="w-full py-2 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-[1px] active:scale-[0.98]    active:shadow-[0_0_10px_rgba(99,102,241,0.2)]"
                     >
-                        Login
+                        {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
 
@@ -53,7 +80,7 @@ function Login() {
                     <span className="text-indigo-400 cursor-pointer hover:underline">
                         <Link to="/register">Register</Link>
                     </span>
-                    
+
                 </p>
             </div>
         </div>

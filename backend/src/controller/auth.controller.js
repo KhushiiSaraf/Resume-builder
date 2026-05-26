@@ -40,13 +40,13 @@ async function registerUserController(req, res) {
         })
         await newUser.save();
         // generate JWT token
-        const token = jwt.sign(
-            { id: newUser._id, username: newUser.name },
-            process.env.JWT_SECRET,
-            { expiresIn: '24h' }
-        );
-        //set token in cookie
-        res.cookie('token', token);
+        // const token = jwt.sign(
+        //     { id: newUser._id, username: newUser.name },
+        //     process.env.JWT_SECRET,
+        //     { expiresIn: '24h' }
+        // );
+        // //set token in cookie
+        // res.cookie('token', token);
         res.status(201).json({
             message: "User registered successfully",
             user: {
