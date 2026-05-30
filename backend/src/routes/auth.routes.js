@@ -3,7 +3,7 @@ const authRouter = express.Router();
 
 const {registerUserController, loginUserController, logoutUserController, getMeController} = require('../controller/auth.controller');
 
-const authMiddleware = require('../middleware/auth.middleware');
+const {authMiddleware} = require('../middleware/auth.middleware');
 
 /**
  * @route POST /api/auth/register

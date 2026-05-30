@@ -10,9 +10,9 @@ const technicalQuestionSchema = new mongoose.Schema({
         type: String,
         required: [ true, "Intention is required" ]
     },
-    answer: {
+    HowToAnswer: {
         type: String,
-        required: [ true, "Answer is required" ]
+        required: [ true, "How to answer is required" ]
     }
 }, {
     _id: false
@@ -27,7 +27,7 @@ const behavioralQuestionSchema = new mongoose.Schema({
         type: String,
         required: [ true, "Intention is required" ]
     },
-    answer: {
+    HowToAnswer: {
         type: String,
         required: [ true, "Answer is required" ]
     }
@@ -84,14 +84,12 @@ const interviewReportSchema = new mongoose.Schema({
     behavioralQuestions: [ behavioralQuestionSchema ],
     skillGaps: [ skillGapSchema ],
     preparationPlan: [ preparationPlanSchema ],
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "users"
-    // },
-    // title: {
-    //     type: String,
-    //     required: [ true, "Job title is required" ]
-    // }
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
+    },
+    title: { type: "string", description: "Just the job title, for example: Full Stack Developer, Data Scientist, etc. Keep it short." },
+
 }, {
     timestamps: true
 })
