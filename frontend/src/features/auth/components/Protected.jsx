@@ -1,20 +1,26 @@
 import {useAuth} from "../hooks/useAuth";
 import {Navigate} from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
+import Navbar from "../../../components/Navbar";
 import react from "react";
 
 function Protected({children}) {
-    const {loading, user} = useAuth();
+    const { authChecking, user } = useAuth();
 
-    if(loading){
+    if(authChecking){
         return <LoadingSpinner />
     }
 
     if(!user){
-        return <Navigate to={"/login" }/>
+        return <Navigate to="/login" />
     }
 
-    return children;
+    return (
+        <>
+            <Navbar />
+            {children}
+        </>
+    )
 }
 
 export default Protected;

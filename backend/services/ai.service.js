@@ -32,11 +32,27 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
     const ai = new GoogleGenAI({
         apiKey: process.env.GOOGLE_GENAI_API_KEY
     })
+    console.log("Generating interview report with resume:", resume, "selfDescription:", selfDescription, "jobDescription:", jobDescription);
 
-    const prompt = `Generate an interview report for a candidate with the following details:
-                        Resume: ${resume}
-                        Self Description: ${selfDescription}
-                        Job Description: ${jobDescription}
+    const prompt = `You are an expert technical interviewer and career coach.
+
+Analyze the following candidate profile against the job description and generate a comprehensive interview preparation report.
+
+Job Description: ${jobDescription}
+
+Candidate Resume: ${resume}
+
+Candidate Self Description: ${selfDescription}
+
+Important Instructions:
+- Technical questions MUST focus on technologies and skills required by the job description
+- Skill gaps MUST identify what the job requires that the candidate is missing or weak in
+- Preparation plan MUST help the candidate learn and bridge the skill gaps for this specific job
+- Match score should honestly reflect alignment between candidate and job (can be low if gaps are significant)
+- Even if match score is low, still generate technical questions based on JD so candidate knows what to prepare
+- Behavioral questions should be relevant to the role
+- Title MUST be extracted from the job description
+- Always generate at least 3 technical questions, 3 behavioral questions, and a preparation plan regardless of match score
 `
 
     const response = await ai.models.generateContent({

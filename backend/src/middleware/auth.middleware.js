@@ -20,7 +20,7 @@ async function authMiddleware(req,res,next){
         }
         // verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
+        req.user = { ...decoded, _id: decoded.id };
         next();
     }
     catch (error) {

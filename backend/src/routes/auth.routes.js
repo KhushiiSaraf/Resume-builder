@@ -24,7 +24,7 @@ authRouter.post('/login', loginUserController);
  * @desc Logout a user by blacklisting the token and clearing the cookie
  * @access Public
  */
-authRouter.get('/logout', logoutUserController);
+authRouter.post('/logout', authMiddleware, logoutUserController);
 
 /**
  * @route GET /api/auth/get-me
