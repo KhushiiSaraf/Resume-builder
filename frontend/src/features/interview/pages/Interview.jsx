@@ -8,10 +8,8 @@ import LoadingSpinner from "../components/LoadingSpinner";
 export default function Interview() {
   const [activeTab, setActiveTab] = useState("technical");
 
-  const {report} = useInterview();
-
-  const { interviewId } = useParams()
-  const { getReportById, loading} = useInterview();
+  const { report, getReportById, loading } = useInterview();
+  const { interviewId } = useParams();
 
   useEffect(() => {
     if (interviewId) {
@@ -19,12 +17,19 @@ export default function Interview() {
     }
   }, [interviewId]);
 
-  if(loading) return <LoadingSpinner />
-  if(!report) return <LoadingSpinner />
+  if (loading) return <LoadingSpinner />;
+  if (!report) return <LoadingSpinner />;
+
+  const formattedTitle = report.title
+    ? report.title.charAt(0).toUpperCase() + report.title.slice(1)
+    : "Interview Preparation";
+
   return (
-<div className="min-h-screen bg-[#0b0f19] text-gray-200 flex flex-col md:flex-row">      
+    <div className="min-h-screen bg-[#0b0f19] text-gray-200 flex flex-col md:flex-row">     
+     
       {/* LEFT SIDEBAR */}
       <div className="md:w-60 w-full border-b md:border-b-0 md:border-r border-white/10 p-4 md:p-6">
+      
         <h2 className="text-lg font-semibold text-gray-300 mb-4">
           Sections
         </h2>
@@ -50,7 +55,17 @@ export default function Interview() {
 
       {/* CENTER CONTENT */}
       <div className="flex-1 p-8 overflow-y-auto">
-        
+        <div className="mb-8">
+          <h1 className="
+  text-3xl md:text-5xl font-bold tracking-tight mb-2
+  bg-gradient-to-r from-indigo-400 to-purple-400 
+  bg-clip-text text-transparent
+">
+  {formattedTitle}
+</h1>
+
+        </div>
+
         {/* TECHNICAL */}
         {activeTab === "technical" && (
           <div className="space-y-6">

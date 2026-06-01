@@ -71,7 +71,7 @@ function Login() {
                         type="submit"
                         className="w-full py-2 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-[1px] active:scale-[0.98]    active:shadow-[0_0_10px_rgba(99,102,241,0.2)]"
                     >
-                        {loading ? "Logging in..." : "Login"}
+                        {loading ? `Logging in...` : "Login"}
                     </button>
                 </form>
 

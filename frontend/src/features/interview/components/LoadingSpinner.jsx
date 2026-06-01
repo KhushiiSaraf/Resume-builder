@@ -11,7 +11,7 @@ function LoadingSpinner() {
                 height: '40px',
                 border: '4px solid #f3f3f3',
                 borderTop: '4px solid #3b82f6',
-                borderRadius: '50%',
+                borderRadius: '70%',
                 animation: 'spin 0.8s linear infinite'
             }} />
             <style>{`
