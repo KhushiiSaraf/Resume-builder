@@ -53,7 +53,8 @@ export default function Home() {
             formRef.current?.scrollIntoView({ behavior: "smooth" });
           }}
           className="px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition text-gray-200 
-          font-medium "
+          font-medium active:scale-[0.97]
+    active:shadow-none"
         >
           Get Started
         </button>
