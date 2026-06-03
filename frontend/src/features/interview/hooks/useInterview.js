@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
-import { InterviewContext } from "../interview.context"
+import { InterviewContext } from "../interview.context";
+import { toast } from "react-toastify";
 import { generateInterviewReport, getInterviewReportById, getAllInterviewReports, deleteInterviewReport } from "../services/interview.api"
 
 export const useInterview = () => {
@@ -57,7 +58,8 @@ const getAllReports = async () => {
 const deleteReport = async (interviewId) => {
     try {
         await deleteInterviewReport(interviewId);
-        setReports(reports.filter(r => r._id !== interviewId))
+        setReports(reports.filter(r => r._id !== interviewId));
+        toast.success("Report deleted successfully");
     } catch (error) {
         setError(error.response?.data?.message || "Something went wrong");
     }

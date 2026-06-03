@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useInterview } from "../hooks/useInterview";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/hooks/useAuth";
+import ConfirmModal from "../../../components/ConfirmModal";
 import { Trash2, NotepadText, UserRoundPen } from "lucide-react";
 
 
@@ -14,8 +15,12 @@ export default function Home() {
   const [validationError, setValidationError] = useState("");
   const resumeInputRef = useRef(null);
 
+  //step state for multi-step form
   const [step, setStep] = useState(1);
   const formRef = useRef(null);
+
+  //confirm delete modal
+  const [selectedReportId, setSelectedReportId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -268,91 +273,99 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
         </div>
       </div>
       <div className="h-px w-full max-w-6xl mx-auto bg-white/10 my-12"></div>
-     {/* All Reports */}
-<div className="flex justify-center">
-  <div className="w-full max-w-6xl mt-12">
+      {/* All Reports */}
+      <div className="flex justify-center">
+        <div className="w-full max-w-6xl mt-12">
 
-    {/* Heading */}
-    <div className="flex items-center justify-between mb-4">
-      <h2 className="text-lg font-semibold text-gray-200">
-        Your Previous Reports
-      </h2>
+          {/* Heading */}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-200">
+              Your Previous Reports
+            </h2>
 
-      {reports.length > 0 && (
-        <span className="text-xs text-gray-500">
-          {reports.length} total
-        </span>
-      )}
-    </div>
-
-    {/* EMPTY STATE */}
-    {reports.length === 0 ? (
-      <div className="flex flex-col items-center justify-center text-center py-16 border border-white/10 rounded-xl bg-white/5">
-
-        <p className="text-gray-300 text-lg mb-2">
-          No reports yet
-        </p>
-
-        <p className="text-gray-500 text-sm mb-6 max-w-sm">
-          Generate your first interview plan to see personalized questions and insights.
-        </p>
-
-        <button
-          onClick={() => {
-            formRef.current?.scrollIntoView({ behavior: "smooth" });
-          }}
-          className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition"
-        >
-          Create First Plan
-        </button>
-      </div>
-    ) : (
-      /* LIST */
-      <div className="space-y-3">
-        {reports.map((report) => (
-          <div
-            key={report._id}
-            onClick={() => navigate(`/interview/${report._id}`)}
-            className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-[1px] hover:shadow-md hover:scale-[1.01] duration-200"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-200 font-medium">
-                  {report.title}
-                </p>
-                <p className="text-gray-400 text-sm">
-                  {new Date(report.createdAt).toLocaleDateString()}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <p className="text-xs text-gray-500 mb-1">
-                    Match Score
-                  </p>
-                  <p className="text-lg font-bold text-white">
-                    {report.matchScore}%
-                  </p>
-                </div>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteReport(report._id);
-                  }}
-                  className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition"
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            </div>
+            {reports.length > 0 && (
+              <span className="text-xs text-gray-500">
+                {reports.length} total
+              </span>
+            )}
           </div>
-        ))}
-      </div>
-    )}
 
-  </div>
-</div>
+          {/* EMPTY STATE */}
+          {reports.length === 0 ? (
+            <div className="flex flex-col items-center justify-center text-center py-16 border border-white/10 rounded-xl bg-white/5">
+
+              <p className="text-gray-300 text-lg mb-2">
+                No reports yet
+              </p>
+
+              <p className="text-gray-500 text-sm mb-6 max-w-sm">
+                Generate your first interview plan to see personalized questions and insights.
+              </p>
+
+              <button
+                onClick={() => {
+                  formRef.current?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition"
+              >
+                Create First Plan
+              </button>
+            </div>
+            ) : (
+            /* LIST */
+            <div className="space-y-3">
+              {reports.map((report) => (
+                <div
+                  key={report._id}
+                  onClick={() => navigate(`/interview/${report._id}`)}
+                  className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-[1px] hover:shadow-md hover:scale-[1.01] duration-200"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-gray-200 font-medium">
+                        {report.title}
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        {new Date(report.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500 mb-1">
+                          Match Score
+                        </p>
+                        <p className="text-lg font-bold text-white">
+                          {report.matchScore}%
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedReportId(report._id);
+                        }}
+                        className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <ConfirmModal
+                open={!!selectedReportId}
+                onClose={() => setSelectedReportId(null)}
+                onConfirm={() => deleteReport(selectedReportId)}
+                title="Delete Report"
+                message="This report will be permanently deleted."
+                confirmText="Delete"
+              />
+            </div>
+          )}
+
+        </div>
+      </div>
     </div>
   );
 }
