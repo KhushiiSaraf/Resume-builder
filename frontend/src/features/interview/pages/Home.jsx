@@ -207,7 +207,7 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
                 />
 
                 {/* Buttons */}
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
 
                   <button
                     type="button"
@@ -217,26 +217,39 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
                     ← Back
                   </button>
 
+                
                   <button
-                    type="submit"
-                    onClick={(e) => {
+  type="submit"
+  onClick={(e) => {
                       const file = resumeInputRef.current.files[0];
                       if (!file && !selfDescription.trim()) return;
                       handleGenerateReport(e);
                     }}
-                    className="px-6 py-3 text-white rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500     transition-all duration-200 ease-out
+  disabled={loading}
+  className={`
+    px-8 py-3 rounded-lg font-medium text-white
+    bg-gradient-to-r from-indigo-500 to-purple-500
+    flex items-center justify-center gap-2
+    transition-all duration-200
     hover:-translate-y-[1px]
     hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]
     active:scale-[0.97]
-    active:shadow-none"
-                  >
-                    {loading ? "Generating..." : "Generate My Plan"}
-                  </button>
+    ${loading ? "opacity-70 cursor-not-allowed" : ""}
+  `}
+>
+  {loading && (
+    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+  )}
+
+  {loading ? "Generating..." : "Generate My Plan"}
+</button>
 
                 </div>
 
               </div>
             )}
+
+
 
 
 
@@ -248,59 +261,61 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
       <div className="h-px w-full max-w-6xl mx-auto bg-white/10 my-12"></div>
       {/* All Reports */}
       {reports.length > 0 && (
-  <div className="flex justify-center">
-    <div className="w-full max-w-6xl mt-12">
+        <div className="flex justify-center">
+          <div className="w-full max-w-6xl mt-12">
 
-          {/* Heading */}
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-200">
-              Your Previous Reports
-            </h2>
+            {/* Heading */}
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-200">
+                Your Previous Reports
+              </h2>
 
-            <span className="text-xs text-gray-500">
-              {reports.length} total
-            </span>
-          </div>
+              <span className="text-xs text-gray-500">
+                {reports.length} total
+              </span>
+            </div>
 
-          {/* List */}
-          <div className="space-y-3">
-            {reports.map((report) => (
-              <div
-                key={report._id}
-                onClick={() => navigate(`/interview/${report._id}`)}
-                className="
+            {/* List */}
+            <div className="space-y-3">
+
+              {reports.map((report) => (
+                <div
+                  key={report._id}
+                  onClick={() => navigate(`/interview/${report._id}`)}
+                  className="
             p-4 bg-white/5 border border-white/10 rounded-xl
             cursor-pointer transition-all
             hover:border-indigo-400/30
             hover:-translate-y-[1px]
             hover:shadow-md
+            hover:scale-[1.01] transition-all duration-200
           "
-              >
-                <div className="flex items-center justify-between">
+                >
+                  <div className="flex items-center justify-between">
 
-                  <div>
-                    <p className="text-gray-200 font-medium">
-                      {report.title}
-                    </p>
-                    <p className="text-gray-400 text-sm">
-                      {new Date(report.createdAt).toLocaleDateString()}
-                    </p>
+                    <div>
+                      <p className="text-gray-200 font-medium">
+                        {report.title}
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        {new Date(report.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-xs text-gray-500 mb-1">
+                        Match Score
+                      </p>
+                      <p className="text-lg font-bold text-white">
+                        {report.matchScore}%
+                      </p>
+                    </div>
+
                   </div>
-
-                  <div className="text-right">
-                    <p className="text-xs text-gray-500 mb-1">
-                      Match Score
-                    </p>
-                    <p className="text-lg font-bold text-white">
-                      {report.matchScore}%
-                    </p>
-                  </div>
-
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
             </div>
+          </div>
         </div>
       )}
     </div>
