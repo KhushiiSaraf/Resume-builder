@@ -1,6 +1,6 @@
 const express = require('express');
 const { authMiddleware } = require('../middleware/auth.middleware');
-const { generateInterviewReportController, getInterviewReportByIdController, getAllInterviewController } = require('../controller/interview.controller');
+const { generateInterviewReportController, getInterviewReportByIdController, getAllInterviewController, deleteInterviewReportController } = require('../controller/interview.controller');
 const uploadMiddleware = require('../middleware/file.middleware');
 
 const interviewRouter = express.Router();
@@ -20,10 +20,17 @@ interviewRouter.post('/',authMiddleware, uploadMiddleware.upload.single('resume'
 interviewRouter.get('/report/:interviewId',authMiddleware, getInterviewReportByIdController)
 
 /**
- * @route POST /api/interview
+ * @route GET /api/interview
  * @description get all interview reports by a user
  * @access private
  */
 interviewRouter.get('/',authMiddleware, getAllInterviewController)
+
+/**
+ * @route DELETE /api/report/:interviewId
+ * @description delete interview report by id
+ * @access private
+ */
+interviewRouter.delete('/report/:interviewId', authMiddleware, deleteInterviewReportController)
 
 module.exports = interviewRouter;

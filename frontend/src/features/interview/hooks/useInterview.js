@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { InterviewContext } from "../interview.context"
-import { generateInterviewReport, getInterviewReportById, getAllInterviewReports } from "../services/interview.api"
+import { generateInterviewReport, getInterviewReportById, getAllInterviewReports, deleteInterviewReport } from "../services/interview.api"
 
 export const useInterview = () => {
     const context = useContext(InterviewContext);
@@ -54,6 +54,15 @@ const getAllReports = async () => {
     }
 }
 
+const deleteReport = async (interviewId) => {
+    try {
+        await deleteInterviewReport(interviewId);
+        setReports(reports.filter(r => r._id !== interviewId))
+    } catch (error) {
+        setError(error.response?.data?.message || "Something went wrong");
+    }
+}
+
     return {
         loading,
         report,
@@ -62,6 +71,7 @@ const getAllReports = async () => {
         generateReport,
         getReportById,
         getAllReports,
+        deleteReport,
         setReport,
         setReports
     }

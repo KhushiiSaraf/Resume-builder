@@ -2,9 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { useInterview } from "../hooks/useInterview";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { Trash2, NotepadText, UserRoundPen } from "lucide-react";
+
+
 export default function Home() {
 
-  const { loading, generateReport, getAllReports, reports, setReports } = useInterview();
+  const { loading, generateReport, getAllReports, deleteReport, reports, setReports } = useInterview();
   const [fileName, setFileName] = useState("No file chosen");
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
@@ -116,7 +119,8 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
               <div className="space-y-6">
 
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-200 mb-2">
+                  <h2 className="text-lg font-semibold text-gray-200 mb-2 flex items-center gap-2">
+                    <NotepadText size={16} />
                     Target Job Description
                   </h2>
 
@@ -160,8 +164,8 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
             {step === 2 && (
               <div className="space-y-6">
 
-                <h2 className="text-lg font-semibold text-gray-200">
-                  Your Profile
+                <h2 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
+                  <UserRoundPen size={16} />Your Profile
                 </h2>
 
                 {/* Resume */}
@@ -249,10 +253,6 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
               </div>
             )}
 
-
-
-
-
           </form>
 
 
@@ -279,41 +279,36 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
             <div className="space-y-3">
 
               {reports.map((report) => (
-                <div
-                  key={report._id}
-                  onClick={() => navigate(`/interview/${report._id}`)}
-                  className="
-            p-4 bg-white/5 border border-white/10 rounded-xl
-            cursor-pointer transition-all
-            hover:border-indigo-400/30
-            hover:-translate-y-[1px]
-            hover:shadow-md
-            hover:scale-[1.01] transition-all duration-200
-          "
-                >
-                  <div className="flex items-center justify-between">
+    <div
+        key={report._id}
+        onClick={() => navigate(`/interview/${report._id}`)}
+        className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-[1px] hover:shadow-md hover:scale-[1.01] duration-200"
+    >
+        <div className="flex items-center justify-between">
+            <div>
+                <p className="text-gray-200 font-medium">{report.title}</p>
+                <p className="text-gray-400 text-sm">{new Date(report.createdAt).toLocaleDateString()}</p>
+            </div>
 
-                    <div>
-                      <p className="text-gray-200 font-medium">
-                        {report.title}
-                      </p>
-                      <p className="text-gray-400 text-sm">
-                        {new Date(report.createdAt).toLocaleDateString()}
-                      </p>
-                    </div>
-
-                    <div className="text-right">
-                      <p className="text-xs text-gray-500 mb-1">
-                        Match Score
-                      </p>
-                      <p className="text-lg font-bold text-white">
-                        {report.matchScore}%
-                      </p>
-                    </div>
-
-                  </div>
+            <div className="flex items-center gap-4">
+                <div className="text-right">
+                    <p className="text-xs text-gray-500 mb-1">Match Score</p>
+                    <p className="text-lg font-bold text-white">{report.matchScore}%</p>
                 </div>
-              ))}
+
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation()  // ← stops card navigation
+                        deleteReport(report._id)
+                    }}
+                    className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition"
+                >
+                    <Trash2 size={16}/>
+                </button>
+            </div>
+        </div>
+    </div>
+))}
             </div>
           </div>
         </div>
