@@ -1,5 +1,6 @@
 import {useContext, useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {AuthContext} from "../auth.context"
 import {login, register, logout, getMe} from "../services/auth.api"
 
@@ -17,6 +18,7 @@ export const useAuth = ()=>{
             if(data.user){
                 setUser(data.user);
                 navigate("/");
+                toast.success("Logged in successfully");
             }
             else{
                 setError(data.message);
@@ -34,6 +36,7 @@ export const useAuth = ()=>{
             const data = await register({name,email,password});
             if(data.user){
                 navigate("/login");
+                toast.success("Registered successfully. Please login.");
             }
             else{
                 setError(data.message);
@@ -50,7 +53,8 @@ const handleLogout = async () => {
     try {
         await logout();
         setUser(null);
-        navigate('/login')  
+        navigate('/login') 
+        toast.success("Logged out successfully"); 
     } catch (error) {
         console.error("Logout failed", error);
     } finally {

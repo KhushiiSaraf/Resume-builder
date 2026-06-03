@@ -2,6 +2,7 @@ const userModel = require('../models/user.model');
 const blacklistTokenModel = require('../models/user.blacklistToken');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { registerSchema, loginSchema } = require("../validator/auth.validator");
 
 /**
  * @name registerUserController
@@ -11,8 +12,16 @@ const jwt = require('jsonwebtoken');
  */
 async function registerUserController(req, res) {
 
+    const { error } = registerSchema.validate(req.body);
+
+    if (error) {
+        return res.status(400).json({
+            message: error.details[0].message,
+        });
+    }
     try {
         const { name, email, password } = req.body;
+
 
         // validate input
         if (!name || !email || !password) {
@@ -68,8 +77,17 @@ async function registerUserController(req, res) {
  * @access Public
  */
 async function loginUserController(req, res) {
+    const { error } = loginSchema.validate(req.body);
+
+    if (error) {
+        return res.status(400).json({
+            message: error.details[0].message,
+        });
+    }
     try {
         const { email, password } = req.body;
+
+
         // find user by email
         const user = await userModel.findOne({ email });
 

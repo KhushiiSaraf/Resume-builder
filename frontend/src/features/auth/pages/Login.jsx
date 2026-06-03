@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import LoadingSpinner from "../components/LoadingSpinner";
 
+
+
 function Login() {
 
     const [email, setEmail] = useState("");
@@ -13,6 +15,7 @@ function Login() {
     const onSubmit = async (e) => {
         e.preventDefault();
         await handleLogin({ email, password });
+        
     }
 
     //could show loading spinner here while checking auth status

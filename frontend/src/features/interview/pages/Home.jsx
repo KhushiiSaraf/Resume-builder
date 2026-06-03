@@ -7,10 +7,11 @@ import { Trash2, NotepadText, UserRoundPen } from "lucide-react";
 
 export default function Home() {
 
-  const { loading, generateReport, getAllReports, deleteReport, reports, setReports } = useInterview();
+  const { loading, generateReport, getAllReports, deleteReport, reports, setReports, error } = useInterview();
   const [fileName, setFileName] = useState("No file chosen");
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
+  const [validationError, setValidationError] = useState("");
   const resumeInputRef = useRef(null);
 
   const [step, setStep] = useState(1);
@@ -22,9 +23,17 @@ export default function Home() {
 
   const handleGenerateReport = async (e) => {
     e.preventDefault();
-    const resumeFile = resumeInputRef.current.files[0];
+
+    const resumeFile = resumeInputRef.current?.files?.[0];
+
+    if (!resumeFile && !selfDescription.trim()) {
+      setValidationError("Please upload a resume or provide your self-description.");
+      return;
+    }
+
+    setValidationError("");
     await generateReport({ jobDescription, selfDescription, resumeFile });
-  }
+  };
   // console.log("user in Home:", user)
   useEffect(() => {
     setReports([])
@@ -113,7 +122,7 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
           </div>
 
           {/* Form */}
-          <form className="space-y-8">
+          <form className="space-y-8" onSubmit={handleGenerateReport}>
 
             {step === 1 && (
               <div className="space-y-6">
@@ -221,16 +230,16 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
                     ← Back
                   </button>
 
-                
+                  {(validationError || error) && (
+                    <div className="text-red-500 text-sm text-center">
+                      {validationError || error}
+                    </div>
+                  )}
+
                   <button
-  type="submit"
-  onClick={(e) => {
-                      const file = resumeInputRef.current.files[0];
-                      if (!file && !selfDescription.trim()) return;
-                      handleGenerateReport(e);
-                    }}
-  disabled={loading}
-  className={`
+                    type="submit"
+                    disabled={loading}
+                    className={`
     px-8 py-3 rounded-lg font-medium text-white
     bg-gradient-to-r from-indigo-500 to-purple-500
     flex items-center justify-center gap-2
@@ -240,13 +249,13 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
     active:scale-[0.97]
     ${loading ? "opacity-70 cursor-not-allowed" : ""}
   `}
->
-  {loading && (
-    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-  )}
+                  >
+                    {loading && (
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    )}
 
-  {loading ? "Generating..." : "Generate My Plan"}
-</button>
+                    {loading ? "Generating..." : "Generate My Plan"}
+                  </button>
 
                 </div>
 
@@ -259,60 +268,91 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
         </div>
       </div>
       <div className="h-px w-full max-w-6xl mx-auto bg-white/10 my-12"></div>
-      {/* All Reports */}
+     {/* All Reports */}
+<div className="flex justify-center">
+  <div className="w-full max-w-6xl mt-12">
+
+    {/* Heading */}
+    <div className="flex items-center justify-between mb-4">
+      <h2 className="text-lg font-semibold text-gray-200">
+        Your Previous Reports
+      </h2>
+
       {reports.length > 0 && (
-        <div className="flex justify-center">
-          <div className="w-full max-w-6xl mt-12">
+        <span className="text-xs text-gray-500">
+          {reports.length} total
+        </span>
+      )}
+    </div>
 
-            {/* Heading */}
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-200">
-                Your Previous Reports
-              </h2>
+    {/* EMPTY STATE */}
+    {reports.length === 0 ? (
+      <div className="flex flex-col items-center justify-center text-center py-16 border border-white/10 rounded-xl bg-white/5">
 
-              <span className="text-xs text-gray-500">
-                {reports.length} total
-              </span>
-            </div>
+        <p className="text-gray-300 text-lg mb-2">
+          No reports yet
+        </p>
 
-            {/* List */}
-            <div className="space-y-3">
+        <p className="text-gray-500 text-sm mb-6 max-w-sm">
+          Generate your first interview plan to see personalized questions and insights.
+        </p>
 
-              {reports.map((report) => (
-    <div
-        key={report._id}
-        onClick={() => navigate(`/interview/${report._id}`)}
-        className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-[1px] hover:shadow-md hover:scale-[1.01] duration-200"
-    >
-        <div className="flex items-center justify-between">
-            <div>
-                <p className="text-gray-200 font-medium">{report.title}</p>
-                <p className="text-gray-400 text-sm">{new Date(report.createdAt).toLocaleDateString()}</p>
-            </div>
+        <button
+          onClick={() => {
+            formRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition"
+        >
+          Create First Plan
+        </button>
+      </div>
+    ) : (
+      /* LIST */
+      <div className="space-y-3">
+        {reports.map((report) => (
+          <div
+            key={report._id}
+            onClick={() => navigate(`/interview/${report._id}`)}
+            className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-[1px] hover:shadow-md hover:scale-[1.01] duration-200"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-200 font-medium">
+                  {report.title}
+                </p>
+                <p className="text-gray-400 text-sm">
+                  {new Date(report.createdAt).toLocaleDateString()}
+                </p>
+              </div>
 
-            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4">
                 <div className="text-right">
-                    <p className="text-xs text-gray-500 mb-1">Match Score</p>
-                    <p className="text-lg font-bold text-white">{report.matchScore}%</p>
+                  <p className="text-xs text-gray-500 mb-1">
+                    Match Score
+                  </p>
+                  <p className="text-lg font-bold text-white">
+                    {report.matchScore}%
+                  </p>
                 </div>
 
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation()  // ← stops card navigation
-                        deleteReport(report._id)
-                    }}
-                    className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteReport(report._id);
+                  }}
+                  className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-400/10 transition"
                 >
-                    <Trash2 size={16}/>
+                  <Trash2 size={16} />
                 </button>
-            </div>
-        </div>
-    </div>
-))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
+    )}
+
+  </div>
+</div>
     </div>
   );
 }

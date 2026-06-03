@@ -3,7 +3,6 @@ import { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-
 function Register() {
 
     const [name,setName] = useState("");
@@ -15,6 +14,7 @@ function Register() {
     const onSubmit = async(e)=>{
         e.preventDefault();
         await handleRegister({name,email,password});
+
     }
 
     return (

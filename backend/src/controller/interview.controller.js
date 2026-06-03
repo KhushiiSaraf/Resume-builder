@@ -3,17 +3,18 @@ const { generateInterviewReport } = require('../../services/ai.service');
 const interviewReportModel = require('../models/interviewReport.model');
 
 /**
- * @description generate interview report 
+ * @description generate interview report using job description and self description or resume 
  */
 async function generateInterviewReportController(req, res) {
     try {
-        if (!req.file) {
-            return res.status(400).json({ error: 'No resume file uploaded' });
+        if(!req.body.selfDescription && !req.file){
+            return res.status(400).json({ message: "Either self description or resume is required!" })
         }
-
-        const resumeBuffer = req.file.buffer;
-        const resumeContent = await pdfParse(resumeBuffer);
-        const resumeText = resumeContent.text;
+        let resumeText = "";
+        if (req.file) {
+            const resumeContent = await pdfParse(req.file.buffer)
+            resumeText = resumeContent.text
+        }
 
         const { selfDescription, jobDescription } = req.body;
 
