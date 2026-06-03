@@ -17,7 +17,7 @@ export const useAuth = ()=>{
             const data = await login({email,password});
             if(data.user){
                 setUser(data.user);
-                navigate("/");
+                navigate("/dashboard");
                 toast.success("Logged in successfully");
             }
             else{
@@ -53,7 +53,7 @@ const handleLogout = async () => {
     try {
         await logout();
         setUser(null);
-        navigate('/login') 
+        navigate('/')
         toast.success("Logged out successfully"); 
     } catch (error) {
         console.error("Logout failed", error);

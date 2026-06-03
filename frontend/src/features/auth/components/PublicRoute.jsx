@@ -7,7 +7,7 @@ function PublicRoute({ children }) {
 
     if(authChecking) return <LoadingSpinner />
 
-    if(user) return <Navigate to="/" />
+    if(user) return <Navigate to="/dashboard" />
 
     return children
 }

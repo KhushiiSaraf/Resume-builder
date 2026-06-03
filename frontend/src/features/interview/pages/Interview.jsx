@@ -29,7 +29,7 @@ export default function Interview() {
     {/* BACK BUTTON ONLY */}
     <div className="mb-6">
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/dashboard")}
         className="text-sm text-gray-400 hover:text-white transition"
       >
         ← Back to Home

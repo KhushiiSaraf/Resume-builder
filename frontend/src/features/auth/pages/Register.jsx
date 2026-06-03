@@ -84,19 +84,27 @@ function Register() {
                     )}
 
                     <button
-                        type="submit"
-                        className="w-full py-2 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-[1px] active:scale-[0.98]    active:shadow-[0_0_10px_rgba(99,102,241,0.2)]"
-                    >
-                        {loading ? "Registering..." : "Register"}
-                    </button>
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full min-h-[44px] inline-flex items-center justify-center gap-2 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-[1px] active:scale-[0.98] active:shadow-[0_0_10px_rgba(99,102,241,0.2)] ${loading ? "opacity-70 cursor-not-allowed" : ""} `}
+                  >
+                    {loading && (
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    )}
+
+                    {loading ? "Registering..." : "Register"}
+                  </button>
                 </form>
 
-                <p className="text-sm text-gray-400 text-center mt-5">
-                    Already have an account?{" "}
-                    <span className="text-indigo-400 cursor-pointer hover:underline">
-                        <Link to="/login">Login</Link>
-                    </span>
-                </p>
+                <div className="flex items-center justify-between text-sm text-gray-400 mt-5">
+                    <Link to="/" className="text-indigo-400 hover:underline">Home</Link>
+                    <p>
+                        Already have an account?{" "}
+                        <span className="text-indigo-400 cursor-pointer hover:underline">
+                            <Link to="/login">Login</Link>
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -306,7 +306,7 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
                 onClick={() => {
                   formRef.current?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition"
+                className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition active:scale-[0.97]"
               >
                 Create First Plan
               </button>
