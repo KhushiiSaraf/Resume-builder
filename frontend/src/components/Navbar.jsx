@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import ConfirmModal from "./ConfirmModal";
+import { LogOut } from "lucide-react";
 
 export default function Navbar() {
     const { user, handleLogout } = useAuth();
@@ -60,9 +61,9 @@ export default function Navbar() {
           ">
                             <button
                                 onClick={() => setShowLogoutModal(true)}
-                                className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/5 transition "
+                                className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/5 transition flex items-center gap-2"
                             >
-                                Logout
+                               <LogOut size={16} strokeWidth={1.5} /> Logout
                             </button>
                         </div>
                     )}

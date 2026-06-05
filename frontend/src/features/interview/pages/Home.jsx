@@ -3,8 +3,7 @@ import { useInterview } from "../hooks/useInterview";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/hooks/useAuth";
 import ConfirmModal from "../../../components/ConfirmModal";
-import { Trash2, NotepadText, UserRoundPen } from "lucide-react";
-
+import { Trash2, NotepadText, UserRoundPen,Files } from "lucide-react";
 
 export default function Home() {
 
@@ -279,8 +278,8 @@ bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tra
 
           {/* Heading */}
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-200">
-              Your Previous Reports
+            <h2 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
+              <Files size={16} strokeWidth={1.5} />Your Previous Reports
             </h2>
 
             {reports.length > 0 && (
