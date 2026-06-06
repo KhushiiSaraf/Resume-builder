@@ -14,12 +14,12 @@ function App() {
       <InterviewProvider>
       <RouterProvider router={router} />
         <ToastContainer
-  position="top-right"
-  autoClose={2000}
-  theme="dark"
-  hideProgressBar
-  toastClassName="bg-[#111827] text-gray-200 border border-white/10 text-sm"
-/>
+          position="top-right"
+          autoClose={2000}
+          theme="dark"
+          hideProgressBar
+          toastClassName="bg-[#111827] text-gray-200 border border-white/10 text-sm"
+        />
       </InterviewProvider>
     </AuthProvider>
   )
