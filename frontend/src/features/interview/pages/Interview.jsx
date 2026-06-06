@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useInterview } from "../hooks/useInterview";
 import LoadingSpinner from "../components/LoadingSpinner";
+import CountUp from "react-countup";
 
 export default function Interview() {
   const [activeTab, setActiveTab] = useState("technical");
@@ -233,7 +234,11 @@ leading-[1.2] pb-1 mb-2">
         <div className="p-5 bg-white/5 border border-white/10 rounded-xl text-center">
           <p className="text-sm text-gray-400 mb-2">Match Score</p>
           <p className="text-3xl font-bold text-indigo-300">
-            {report.matchScore}%
+              <CountUp
+                end={report.matchScore}
+                duration={1.5}
+              />
+               %
           </p>
         </div>
 

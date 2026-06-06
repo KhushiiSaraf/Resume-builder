@@ -31,8 +31,8 @@ export default function Navbar() {
   shadow-[0_2px_10px_rgba(0,0,0,0.2)]">
 
                 {/* LOGO */}
-                <h1 className="text-lg font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                    InterviewAI
+                <h1 className="text-lg font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent cursor-pointer">
+                    ResuMatch
                 </h1>
 
                 {/* RIGHT SIDE */}
@@ -41,10 +41,10 @@ export default function Navbar() {
                     {/* PROFILE BUTTON */}
                     <button
                         onClick={() => setOpen(!open)}
-                        className="flex items-center gap-3 px-3 py-1.5 rounded-lg hover:bg-white/5 transition"
+                        className="flex items-center gap-3 px-3 py-1.5 rounded-lg hover:bg-white/5 transition cursor-pointer"
                     >
                         {/* Avatar */}
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-sm font-medium cursor-pointer">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-sm font-medium ">
                             {user?.name?.charAt(0).toUpperCase()}
                         </div>
 
