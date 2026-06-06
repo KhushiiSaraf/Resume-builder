@@ -18,7 +18,7 @@ function App() {
   autoClose={2000}
   theme="dark"
   hideProgressBar
-  toastClassName="bg-[#111827] text-gray-200 border border-white/10"
+  toastClassName="bg-[#111827] text-gray-200 border border-white/10 text-sm"
 />
       </InterviewProvider>
     </AuthProvider>

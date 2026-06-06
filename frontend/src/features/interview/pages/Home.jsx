@@ -39,7 +39,6 @@ export default function Home() {
     setValidationError("");
     await generateReport({ jobDescription, selfDescription, resumeFile });
   };
-  // console.log("user in Home:", user)
   useEffect(() => {
     setReports([])
     getAllReports()
@@ -50,19 +49,19 @@ export default function Home() {
 
     <div className="relative min-h-screen flex flex-col bg-[#0b0f19] px-4 py-10 md:py-16 overflow-x-hidden">
 
-{/* Glow */}
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div className="absolute w-[400px] h-[400px] bg-indigo-600/15 blur-[100px] rounded-full top-[-100px] left-[-100px]" />
-    <div className="absolute w-[350px] h-[350px] bg-purple-600/15 blur-[100px] rounded-full top-[-80px] right-[-80px]" />
+    {/* Glow */}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute w-100 h-100 bg-indigo-600/15 blur-[100px] rounded-full -top-25 -left-25" />
+        <div className="absolute w-87.5 h-87.5 bg-purple-600/15 blur-[100px] rounded-full -top-20 -right-20" />
 
-</div>
+    </div>
 
       {/* Hero Section */}
       <motion.div className="flex flex-col items-center justify-center text-center px-4 py-20" initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}>
 
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-300 via-white to-purple-300 bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-indigo-300 via-white to-purple-300 bg-clip-text text-transparent mb-4">
           Crack Your Next Interview with AI
         </h1>
 
@@ -74,9 +73,9 @@ export default function Home() {
           onClick={() => {
             formRef.current?.scrollIntoView({ behavior: "smooth" });
           }}
-          className="px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition text-gray-200 
+          className="px-6 py-3 rounded-lg bg-linear-to-r from-indigo-500 to-purple-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition text-gray-200 
           font-medium active:scale-[0.97]
-    active:shadow-none "
+          active:shadow-none "
         >
           Get Started
         </button>
@@ -84,7 +83,7 @@ export default function Home() {
       </motion.div>
 
 
-      <div className="h-px w-full max-w-4xl mx-auto bg-gradient-to-r from-transparent via-white/10 to-transparent my-12"></div>
+      <div className="h-px w-full max-w-4xl mx-auto bg-linear-to-r from-transparent via-white/10 to-transparent my-12"></div>
 
       <motion.div id="form-section" ref={formRef} className="mt-10 md:mt-16 flex justify-center" initial={{ opacity: 0, y: 30 }}
         whileInView ={{ opacity: 1, y: 0 }}
@@ -93,9 +92,9 @@ export default function Home() {
         {/* Card */}
         <div className="relative w-full max-w-6xl backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-2xl shadow-2xl">
 
-          {/* SAME TEXT */}
+          {/* Card Heading */}
           <h1 className="text-3xl md:text-4xl font-bold text-center mb-3 
-            bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tracking-tight drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
+            bg-linear-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent tracking-tight drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
             <span className="text-gray-200">Create Your</span> Personalized Interview Plan
           </h1>
 
@@ -108,8 +107,8 @@ export default function Home() {
             {/* Step 1 */}
             <div className="flex items-center gap-2">
               <div className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-medium
-      ${step >= 1
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md"
+                ${step >= 1
+                  ? "bg-linear-to-r from-indigo-500 to-purple-500 text-white shadow-md"
                   : "bg-white/10 text-gray-400"}`}>
                 1
               </div>
@@ -123,8 +122,8 @@ export default function Home() {
             {/* Step 2 */}
             <div className="flex items-center gap-2">
               <div className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-medium
-      ${step >= 2
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md"
+              ${step >= 2
+                  ? "bg-linear-to-r from-indigo-500 to-purple-500 text-white shadow-md"
                   : "bg-white/10 text-gray-400"}`}>
                 2
               </div>
@@ -144,7 +143,7 @@ export default function Home() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="space-y-6">
+                  >
 
                   <div>
                     <h2 className="text-lg font-semibold text-gray-200 mb-2 flex items-center gap-2">
@@ -169,18 +168,17 @@ export default function Home() {
                         setStep(2);
                       }}
                       className={`
-  px-6 py-2 rounded-lg
-  transition-all duration-200
-      transition-all duration-200 ease-out
-    hover:-translate-y-[1px]
-    hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]
-    active:scale-[0.97]
-    active:shadow-none
-  ${!jobDescription.trim()
+                            px-6 py-2 rounded-lg
+                                transition-all duration-200 ease-out
+                              hover:-translate-y-px
+                              hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]
+                              active:scale-[0.97]
+                              active:shadow-none
+                            ${!jobDescription.trim()
                           ? "bg-white/10 text-gray-500 cursor-not-allowed"
-                          : "bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:shadow-lg hover:-translate-y-[1px] active:scale-[0.97]"
+                          : "bg-linear-to-r from-indigo-500 to-purple-500 text-white hover:shadow-lg hover:-translate-y-px active:scale-[0.97]"
                         }
-`}
+                      `}
                       disabled={!jobDescription.trim()}
                     >
                       Next →
@@ -263,15 +261,15 @@ export default function Home() {
                       type="submit"
                       disabled={loading}
                       className={`
-    px-8 py-3 rounded-lg font-medium text-white
-    bg-gradient-to-r from-indigo-500 to-purple-500
-    flex items-center justify-center gap-2
-    transition-all duration-200
-    hover:-translate-y-[1px]
-    hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]
-    active:scale-[0.97]
-    ${loading ? "opacity-70 cursor-not-allowed" : ""}
-  `}
+                        px-8 py-3 rounded-lg font-medium text-white
+                        bg-linear-to-r from-indigo-500 to-purple-500
+                        flex items-center justify-center gap-2
+                        transition-all duration-200
+                        hover:-translate-y-px
+                        hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]
+                        active:scale-[0.97]
+                        ${loading ? "opacity-70 cursor-not-allowed" : ""}
+                      `}
                     >
                       {loading && (
                         <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
@@ -325,7 +323,7 @@ export default function Home() {
                 onClick={() => {
                   formRef.current?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition active:scale-[0.97]"
+                className="px-5 py-2 rounded-lg bg-linear-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90 transition active:scale-[0.97]"
               >
                 Create First Plan
               </button>
@@ -341,7 +339,7 @@ export default function Home() {
                   transition={{ delay: i * 0.08 }}
                   viewport={{once: true}}
                   onClick={() => navigate(`/interview/${report._id}`)}
-                  className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-[1px] hover:shadow-md hover:scale-[1.01] duration-200"
+                  className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-px hover:shadow-md hover:scale-[1.01] duration-200"
                 >
                   <div className="flex items-center justify-between">
                     <div>

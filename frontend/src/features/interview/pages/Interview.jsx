@@ -45,9 +45,9 @@ export default function Interview() {
 
         {/* TITLE */}
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight
-bg-gradient-to-r from-indigo-400 to-purple-400 
-bg-clip-text text-transparent 
-leading-[1.2] pb-1 mb-2">
+          bg-linear-to-r from-indigo-400 to-purple-400 
+          bg-clip-text text-transparent 
+          leading-[1.2] pb-1 mb-2">
           {formattedTitle}
         </h1>
 
@@ -94,8 +94,8 @@ leading-[1.2] pb-1 mb-2">
                       {q.question}
                     </p>
                     <span className="text-lg transition rotate-0">
-  {openIndex === i ? "–" : "+"}
-</span>
+                      {openIndex === i ? "–" : "+"}
+                    </span>
                   </div>
 
                   <div
@@ -106,29 +106,29 @@ leading-[1.2] pb-1 mb-2">
                   >
                     <div className="text-[15px] text-gray-400 space-y-3">
 
-  <div>
-    <p className="text-xs uppercase tracking-wide text-indigo-300 mb-1">
-      Intention
-    </p>
-    <p className="leading-relaxed">
-      {q.intention}
-    </p>
-  </div>
-
-  <div>
-    <p className="text-xs uppercase tracking-wide text-purple-300 mb-1">
-      How to Answer
-    </p>
-    <p className="leading-relaxed">
-      {q.HowToAnswer}
-    </p>
-  </div>
-
-</div>
+                  <div>
+                    <p className="text-xs uppercase tracking-wide text-indigo-300 mb-1">
+                      Intention
+                    </p>
+                    <p className="leading-relaxed">
+                      {q.intention}
+                    </p>
                   </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-wide text-purple-300 mb-1">
+                      How to Answer
+                    </p>
+                    <p className="leading-relaxed">
+                      {q.HowToAnswer}
+                    </p>
+                  </div>
+
                 </div>
-              ))}
+               </div>
             </div>
+          ))}
+         </div>
           )}
 
           {/* BEHAVIORAL */}
@@ -147,8 +147,8 @@ leading-[1.2] pb-1 mb-2">
                       {q.question}
                     </p>
                     <span className="text-lg transition rotate-0">
-  {openIndex === i ? "–" : "+"}
-</span>
+                      {openIndex === i ? "–" : "+"}
+                    </span>
                   </div>
 
                   <div
@@ -159,76 +159,76 @@ leading-[1.2] pb-1 mb-2">
                   >
                     <div className="text-[15px] text-gray-400 space-y-3">
 
-  <div>
-    <p className="text-xs uppercase tracking-wide text-indigo-300 mb-1">
-      Intention
-    </p>
-    <p className="leading-relaxed">
-      {q.intention}
-    </p>
-  </div>
-
-  <div>
-    <p className="text-xs uppercase tracking-wide text-purple-300 mb-1">
-      How to Answer
-    </p>
-    <p className="leading-relaxed">
-      {q.HowToAnswer}
-    </p>
-  </div>
-
-</div>
+                  <div>
+                    <p className="text-xs uppercase tracking-wide text-indigo-300 mb-1">
+                      Intention
+                    </p>
+                    <p className="leading-relaxed">
+                      {q.intention}
+                    </p>
                   </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-wide text-purple-300 mb-1">
+                      How to Answer
+                    </p>
+                    <p className="leading-relaxed">
+                      {q.HowToAnswer}
+                    </p>
+                  </div>
+
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+             </div>
+            ))}
+          </div>
+        )}
 
           {/* PLAN */}
           {activeTab === "plan" && (
             <div className="space-y-0">
-  {report.preparationPlan.map((day, i) => (
-    <div key={i} className="flex gap-4">
+             {report.preparationPlan.map((day, i) => (
+               <div key={i} className="flex gap-4">
 
-      {/* LEFT LINE + DOT */}
-      <div className="flex flex-col items-center">
-        
-        {/* DOT */}
-        <div className="w-3 h-3 rounded-full bg-indigo-400 mt-2"></div>
+              {/* LEFT LINE + DOT */}
+              <div className="flex flex-col items-center">
+                
+                {/* DOT */}
+                <div className="w-3 h-3 rounded-full bg-indigo-400 mt-2"></div>
 
-        {/* LINE */}
-        {i !== report.preparationPlan.length - 1 && (
-          <div className="w-[2px] h-full bg-white/10"></div>
-        )}
-      </div>
+                {/* LINE */}
+                {i !== report.preparationPlan.length - 1 && (
+                  <div className="w-0.5 h-full bg-white/10"></div>
+                )}
+              </div>
 
-      {/* CONTENT */}
-      <div className="pb-8">
-        <p className="text-indigo-300 font-semibold">
-          Day {day.day}
-        </p>
+              {/* CONTENT */}
+              <div className="pb-8">
+                <p className="text-indigo-300 font-semibold">
+                  Day {day.day}
+                </p>
 
-        <p className="text-gray-200 text-sm mb-2">
-          {day.focus}
-        </p>
+                <p className="text-gray-200 text-sm mb-2">
+                  {day.focus}
+                </p>
 
-        <ul className="list-disc ml-5 text-sm text-gray-400 space-y-1">
-          {day.tasks.map((task, idx) => (
-            <li key={idx}>{task}</li>
+                <ul className="list-disc ml-5 text-sm text-gray-400 space-y-1">
+                  {day.tasks.map((task, idx) => (
+                    <li key={idx}>{task}</li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
           ))}
-        </ul>
-      </div>
-
-    </div>
-  ))}
-</div>
+        </div>
           )}
 
         </div>
       </div>
 
       {/* RIGHT PANEL */}
-      <div className="w-full md:w-72 flex-shrink-0 space-y-6 md:sticky md:top-6 h-fit">
+      <div className="w-full md:w-72 shrink-0 space-y-6 md:sticky md:top-6 h-fit">
 
         {/* MATCH SCORE */}
         <div className="p-5 bg-white/5 border border-white/10 rounded-xl text-center">
@@ -251,31 +251,31 @@ leading-[1.2] pb-1 mb-2">
             {/* COLOR LEGEND */}
             <div className="flex items-center gap-2">
 
-  {/* RED */}
-  <div className="relative">
-    <div className="w-2.5 h-2.5 rounded-full bg-red-400 cursor-pointer peer"></div>
-    <span className="absolute hidden peer-hover:block text-[10px] bg-[#111827] border border-white/10 text-gray-300 px-2 py-1 rounded -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
-      High 
-    </span>
-  </div>
+              {/* RED */}
+              <div className="relative">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400 cursor-pointer peer"></div>
+                <span className="absolute hidden peer-hover:block text-[10px] bg-[#111827] border border-white/10 text-gray-300 px-2 py-1 rounded -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                  High 
+                </span>
+              </div>
 
-  {/* YELLOW */}
-  <div className="relative">
-    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400 cursor-pointer peer"></div>
-    <span className="absolute hidden peer-hover:block text-[10px] bg-[#111827] border border-white/10 text-gray-300 px-2 py-1 rounded -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
-      Medium 
-    </span>
-  </div>
+              {/* YELLOW */}
+              <div className="relative">
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400 cursor-pointer peer"></div>
+                <span className="absolute hidden peer-hover:block text-[10px] bg-[#111827] border border-white/10 text-gray-300 px-2 py-1 rounded -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                  Medium 
+                </span>
+              </div>
 
-  {/* GREEN */}
-  <div className="relative">
-    <div className="w-2.5 h-2.5 rounded-full bg-green-400 cursor-pointer peer"></div>
-    <span className="absolute hidden peer-hover:block text-[10px] bg-[#111827] border border-white/10 text-gray-300 px-2 py-1 rounded -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
-      Low 
-    </span>
-  </div>
+              {/* GREEN */}
+              <div className="relative">
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400 cursor-pointer peer"></div>
+                <span className="absolute hidden peer-hover:block text-[10px] bg-[#111827] border border-white/10 text-gray-300 px-2 py-1 rounded -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                  Low 
+                </span>
+              </div>
 
-</div>
+            </div>
 
           </div>
 
@@ -296,9 +296,8 @@ leading-[1.2] pb-1 mb-2">
             ))}
           </div>
         </div>
-
       </div>
-
     </div>
-  </div>);
+  </div>
+  );
 }

@@ -8,7 +8,7 @@ export default function Landing() {
   const { user } = useAuth();
 
   //motion values for report preview hover effect
-  const cardRef = useRef(null)
+const cardRef = useRef(null)
 const x = useMotionValue(0)
 const y = useMotionValue(0)
 
@@ -58,7 +58,7 @@ const itemVariants = {
   return (
     <div className="min-h-screen bg-[#0b0f19] text-gray-200 flex flex-col">
       <nav className="flex justify-between items-center px-6 py-4 border-b border-white/10 bg-[#0b0f19]/90 backdrop-blur">
-        <Link to="/" className="text-lg font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+        <Link to="/" className="text-lg font-bold bg-linear-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
           ResuMatch
         </Link>
 
@@ -72,7 +72,7 @@ const itemVariants = {
           ) : (
             <>
               <Link to="/login" className="text-gray-400 hover:text-white transition active:scale-95">Login</Link>
-              <Link to="/register" className="px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:opacity-90 transition-all duration-150 active:scale-95 active:shadow-[0_0_18px_rgba(99,102,241,0.35)]">
+              <Link to="/register" className="px-4 py-2 rounded-lg bg-linear-to-r from-indigo-500 to-purple-500 text-white hover:opacity-90 transition-all duration-150 active:scale-95 active:shadow-[0_0_18px_rgba(99,102,241,0.35)]">
                 Sign Up
               </Link>
             </>
@@ -82,7 +82,7 @@ const itemVariants = {
       {/* hero section */}
       <main className="flex flex-col items-center justify-center text-center flex-1 px-4 py-16">
         <p className="text-indigo-300 uppercase tracking-[0.25em] text-xs mb-4">AI interview prep</p>
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-indigo-300 via-white to-purple-300 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 bg-linear-to-r from-indigo-300 via-white to-purple-300 bg-clip-text text-transparent">
           Ace your next interview with AI
         </h1>
 
@@ -94,7 +94,7 @@ const itemVariants = {
           {user ? (
             <Link
               to="/dashboard"
-              className="px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium hover:opacity-90 transition-all duration-150 active:scale-95 active:brightness-90 shadow-[0_0_18px_rgba(99,102,241,0.25)]"
+              className="px-6 py-3 rounded-lg bg-linear-to-r from-indigo-500 to-purple-500 text-white font-medium hover:opacity-90 transition-all duration-150 active:scale-95 active:brightness-90 shadow-[0_0_18px_rgba(99,102,241,0.25)]"
             >
               Continue to Dashboard
             </Link>
@@ -102,28 +102,28 @@ const itemVariants = {
             <>
               <Link
                 to="/register"
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium 
-hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition-all duration-150 active:scale-95 active:shadow-[0_0_18px_rgba(99,102,241,0.35)]"
+                className="px-6 py-3 rounded-lg bg-linear-to-r from-indigo-500 to-purple-500 text-white font-medium 
+                  hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition-all duration-150 active:scale-95 active:shadow-[0_0_18px_rgba(99,102,241,0.35)]"
               >
                 Get Started Free
               </Link>
               <Link
                 to="/login"
                 className="
-px-6 py-3
-rounded-xl
-border border-white/10
-bg-white/5
+                px-6 py-3
+                rounded-xl
+                border border-white/10
+                bg-white/5
 
-transition-all duration-200
+                transition-all duration-200
 
-hover:bg-white/10
-hover:border-white/20
-hover:-translate-y-[1px]
+                hover:bg-white/10
+                hover:border-white/20
+                hover:-translate-y-px
 
-active:scale-95
-active:bg-white/15"
-              >
+                active:scale-95
+                active:bg-white/15"
+                >
                 Login
               </Link>
             </>
@@ -141,17 +141,17 @@ active:bg-white/15"
           {/* Step 1 */}
 
           <motion.div
-initial={{ opacity: 0, y: 30 }}
-whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.5, ease: "easeOut" }}
-  whileHover={{
-  y: -8,
-  scale: 1.02
-}}
-viewport={{
-  amount: 0.3,
-  once: true
-}}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{
+              y: -8,
+              scale: 1.02
+            }}
+            viewport={{
+              amount: 0.3,
+              once: true
+            }}
             className="
               relative
               bg-white/5 border border-white/10 rounded-2xl p-6
@@ -162,7 +162,7 @@ viewport={{
               <div
                 className="
                 w-10 h-10 shrink-0 rounded-full
-                bg-gradient-to-r from-indigo-500 to-purple-500
+                bg-linear-to-r from-indigo-500 to-purple-500
                 flex items-center justify-center
                 text-white text-sm font-bold 
               "
@@ -182,31 +182,31 @@ viewport={{
 
           {/* Step 2 */}
           <motion.div
-initial={{ opacity: 0, y: 30 }}
-whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.5, ease: "easeOut" }}
-  whileHover={{
-  y: -8,
-  scale: 1.02
-}}
-viewport={{
-  amount: 0.3,
-  once: true
-}}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{
+              y: -8,
+              scale: 1.02
+            }}
+            viewport={{
+              amount: 0.3,
+              once: true
+            }}
             className="
-      relative
-      bg-white/5 border border-white/10 rounded-2xl p-6
-      hover:border-indigo-400/30
-    "
+              relative
+              bg-white/5 border border-white/10 rounded-2xl p-6
+              hover:border-indigo-400/30
+            "
           >
             <div className="flex items-center gap-3 mb-4">
             <div
               className="
-        w-10 h-10 shrink-0 rounded-full
-        bg-gradient-to-r from-indigo-500 to-purple-500
-        flex items-center justify-center
-        text-white text-sm font-bold 
-      "
+                w-10 h-10 shrink-0 rounded-full
+                bg-linear-to-r from-indigo-500 to-purple-500
+                flex items-center justify-center
+                text-white text-sm font-bold 
+              "
             >
               02
             </div>
@@ -223,31 +223,31 @@ viewport={{
 
           {/* Step 3 */}
           <motion.div initial={{ opacity: 0, y: 30 }}
-whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.5, ease: "easeOut" }}
-  whileHover={{
-  y: -8,
-  scale: 1.02
-}}
-viewport={{
-  amount: 0.3,
-  once: true
-}}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{
+              y: -8,
+              scale: 1.02
+            }}
+            viewport={{
+              amount: 0.3,
+              once: true
+            }}
   
             className="
-      relative
-      bg-white/5 border border-white/10 rounded-2xl p-6
-      hover:border-indigo-400/30
-    "
+            relative
+            bg-white/5 border border-white/10 rounded-2xl p-6
+            hover:border-indigo-400/30
+          "
           >
             <div className="flex items-center gap-3 mb-4">
             <div
               className="
-        w-10 h-10 shrink-0 rounded-full
-        bg-gradient-to-r from-indigo-500 to-purple-500
-        flex items-center justify-center
-        text-white text-sm font-bold 
-      "
+                w-10 h-10 shrink-0 rounded-full
+                bg-linear-to-r from-indigo-500 to-purple-500
+                flex items-center justify-center
+                text-white text-sm font-bold 
+              "
             >
               03
             </div>
@@ -276,21 +276,21 @@ viewport={{
 
           <motion.div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-indigo-400/30"
           initial={{
-  opacity: 0,
-  scale: 0.9,
-  y: 30
-}}
+            opacity: 0,
+            scale: 0.9,
+            y: 30
+          }}
 
-whileInView={{
-  opacity: 1,
-  scale: 1,
-  y: 0
-}}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0
+          }}
 
-transition={{
-  duration: 0.5,
-  ease: "easeOut"
-}} viewport={{once:true}}>
+          transition={{
+            duration: 0.5,
+            ease: "easeOut"
+          }} viewport={{once:true}}>
 
             <h3 className="text-lg font-semibold mb-3 text-white">
               Technical Questions
@@ -303,21 +303,21 @@ transition={{
 
           <motion.div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-indigo-400/30"
           initial={{
-  opacity: 0,
-  scale: 0.9,
-  y: 30
-}}
+            opacity: 0,
+            scale: 0.9,
+            y: 30
+          }}
 
-whileInView={{
-  opacity: 1,
-  scale: 1,
-  y: 0
-}}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0
+          }}
 
-transition={{
-  duration: 0.5,
-  ease: "easeOut"
-}} viewport={{once:true}}>
+          transition={{
+            duration: 0.5,
+            ease: "easeOut"
+          }} viewport={{once:true}}>
 
             <h3 className="text-lg font-semibold mb-3 text-white ">
               Skill Gap Analysis
@@ -330,22 +330,22 @@ transition={{
 
           <motion.div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-indigo-400/30"
           initial={{
-  opacity: 0,
-  scale: 0.9,
-  y: 30
-}}
+            opacity: 0,
+            scale: 0.9,
+            y: 30
+          }}
 
-whileInView={{
-  opacity: 1,
-  scale: 1,
-  y: 0
-}}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            y: 0
+          }}
 
-transition={{
-  duration: 0.5,
-  ease: "easeOut"
-}}
-viewport={{once:true}}>
+          transition={{
+            duration: 0.5,
+            ease: "easeOut"
+          }}
+          viewport={{once:true}}>
             <h3 className="text-lg font-semibold mb-3 text-white">
               Preparation Plan
             </h3>
@@ -374,10 +374,10 @@ viewport={{once:true}}>
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         style={{
-    rotateX: rotateXSpring,
-    rotateY: rotateYSpring,
-    transformPerspective: 1000,
-}}>
+              rotateX: rotateXSpring,
+              rotateY: rotateYSpring,
+              transformPerspective: 1000,
+          }}>
 
           <div className="flex flex-col md:flex-row gap-6">
 
@@ -385,16 +385,16 @@ viewport={{once:true}}>
             <div className="flex-1">
 
               <motion.h3 className="text-xl font-semibold text-white mb-4"  initial={{ opacity: 0, x: -20 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.5 }} viewport={{once:true}}>
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }} viewport={{once:true}}>
 
                 Full Stack Developer
               </motion.h3>
 
               <motion.div className="space-y-3"  variants={containerVariants}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ amount: 0.3, once: true }}>
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.3, once: true }}>
 
                 <motion.div className="p-3 bg-white/5 rounded-lg" variants={itemVariants}>
                   Explain React hooks and their use cases.
@@ -415,9 +415,9 @@ viewport={{once:true}}>
             <div className="w-full md:w-72 space-y-4">
 
               <motion.div className="bg-white/5 rounded-xl p-4 border border-white/10 "  initial={{ opacity: 0, scale: 0.9 }}
-  whileInView={{ opacity: 1, scale: 1 }}
-  viewport={{ amount: 0.3, once: true }}
-  transition={{ duration: 0.5 }}>
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ amount: 0.3, once: true }}
+              transition={{ duration: 0.5 }}>
                 <p className="text-gray-400 text-sm mb-2">
                   Match Score
                 </p>
@@ -440,9 +440,9 @@ viewport={{once:true}}>
                 </p>
 
                 <motion.div className="space-y-2" variants={containerVariants}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ amount: 0.3, once: true }}>
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.3, once: true }}>
                   <motion.div className="border border-yellow-400/40 rounded-lg px-3 py-2 text-sm" variants={itemVariants}>
                     System Design
                   </motion.div>
@@ -478,7 +478,7 @@ viewport={{once:true}}>
         {!user && (
           <Link
             to="/register"
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition-all duration-150 active:scale-95 active:shadow-[0_0_18px_rgba(99,102,241,0.35)]"
+            className="px-6 py-3 rounded-xl bg-linear-to-r from-indigo-500 to-purple-500 text-white font-medium hover:shadow-[0_0_25px_rgba(99,102,241,0.35)] transition-all duration-150 active:scale-95 active:shadow-[0_0_18px_rgba(99,102,241,0.35)]"
           >
             Get Started Free
           </Link>

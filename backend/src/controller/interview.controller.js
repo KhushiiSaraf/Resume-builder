@@ -31,7 +31,6 @@ async function generateInterviewReportController(req, res) {
             jobDescription,
             ...interviewReportByAi
         })
-        console.log("AI Response:", JSON.stringify(interviewReportByAi, null, 2))
 
         res.status(201).json({
             message: 'Interview report generated successfully',

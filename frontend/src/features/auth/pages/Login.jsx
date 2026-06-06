@@ -18,15 +18,14 @@ function Login() {
         
     }
 
-    //could show loading spinner here while checking auth status
 
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-[#0b0f19] px-4 overflow-hidden">
 
             {/* glow wrapper */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute w-[400px] h-[400px] bg-indigo-600/20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
-                <div className="absolute w-[300px] h-[300px] bg-purple-600/20 blur-3xl rounded-full bottom-[-80px] right-[-80px]" />
+                <div className="absolute w-100 h-100 bg-indigo-600/20 blur-3xl rounded-full -top-25 -left-25" />
+                <div className="absolute w-75 h-75 bg-purple-600/20 blur-3xl rounded-full -bottom-20 -right-20" />
             </div>
 
             {/* actual card */}
@@ -72,7 +71,7 @@ function Login() {
                     <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full min-h-[44px] inline-flex items-center justify-center gap-2 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-[1px] active:scale-[0.98] active:shadow-[0_0_10px_rgba(99,102,241,0.2)] ${loading ? "opacity-70 cursor-not-allowed" : ""} `}
+                    className={`w-full min-h-11 inline-flex items-center justify-center gap-2 py-2 rounded-lg font-medium text-white bg-linear-to-r from-indigo-500 to-purple-500 transition-all duration-200 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] hover:-translate-y-px active:scale-[0.98] active:shadow-[0_0_10px_rgba(99,102,241,0.2)] ${loading ? "opacity-70 cursor-not-allowed" : ""} `}
                   >
                     {loading && (
                       <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
