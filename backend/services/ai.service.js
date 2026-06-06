@@ -49,10 +49,15 @@ Important Instructions:
 - Skill gaps MUST identify what the job requires that the candidate is missing or weak in
 - Preparation plan MUST help the candidate learn and bridge the skill gaps for this specific job
 - Match score should honestly reflect alignment between candidate and job (can be low if gaps are significant)
-- Even if match score is low, still generate technical questions based on JD so candidate knows what to prepare
+- Even if match score is low, still generate relevant technical questions based on JD so candidate knows what to prepare
 - Behavioral questions should be relevant to the role
 - Title MUST be extracted from the job description
-- Always generate at least 3 technical questions, 3 behavioral questions, and a preparation plan regardless of match score
+- Always generate at least 5 technical questions, 5 behavioral questions, these questions can be more than 5 if the job description is very broad and requires diverse skills
+- Always generate a preparation plan based on the severity and number of skill gaps
+- If skill gaps are low severity, generate a 3-5 day plan
+- If skill gaps are medium severity, generate a 7-10 day plan  
+- If skill gaps are high severity, generate a 14-21 day plan
+- Plan should be practical and actionable, with specific tasks for each day that the candidate can follow to prepare effectively for the interview.
 `
 
     const response = await ai.models.generateContent({

@@ -6,10 +6,13 @@ const registerSchema = Joi.object({
   email: Joi.string().email().required(),
 
   password: Joi.string()
-    .min(6)
+    .min(8)
     .max(20)
-    .pattern(new RegExp("^[a-zA-Z0-9@#$%^&*!]+$"))
-    .required(),
+    .required()
+    .messages({
+        "string.min": "Password must be at least 8 characters",
+        "string.max": "Password cannot exceed 20 characters"
+    })
 });
 
 const loginSchema = Joi.object({
