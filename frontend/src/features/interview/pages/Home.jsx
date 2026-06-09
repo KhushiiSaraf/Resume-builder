@@ -329,13 +329,14 @@ export default function Home() {
 
                       {loading ? "Generating..." : "Generate My Plan"}
                     </button>
+
+
+                  </div>
                     {loading && (
                       <p className="mt-3 text-center text-sm md:text-base text-indigo-300 animate-pulse">
                         {loadingMessage}
                       </p>
                     )}
-
-                  </div>
 
                 </motion.div>
               )}
