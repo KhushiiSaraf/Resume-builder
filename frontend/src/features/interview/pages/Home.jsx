@@ -22,9 +22,26 @@ export default function Home() {
   //confirm delete modal
   const [selectedReportId, setSelectedReportId] = useState(null);
 
+  //loading message while generating report
+  const [loadingMessage, setLoadingMessage] = useState("");
+
   const navigate = useNavigate();
 
   const { user } = useAuth()
+
+  // const handleGenerateReport = async (e) => {
+  //   e.preventDefault();
+
+  //   const resumeFile = resumeInputRef.current?.files?.[0];
+
+  //   if (!resumeFile && !selfDescription.trim()) {
+  //     setValidationError("Please upload a resume or provide your self-description.");
+  //     return;
+  //   }
+
+  //   setValidationError("");
+  //   await generateReport({ jobDescription, selfDescription, resumeFile });
+  // };
 
   const handleGenerateReport = async (e) => {
     e.preventDefault();
@@ -32,13 +49,48 @@ export default function Home() {
     const resumeFile = resumeInputRef.current?.files?.[0];
 
     if (!resumeFile && !selfDescription.trim()) {
-      setValidationError("Please upload a resume or provide your self-description.");
+      setValidationError(
+        "Please upload a resume or provide your self-description."
+      );
       return;
     }
 
     setValidationError("");
-    await generateReport({ jobDescription, selfDescription, resumeFile });
+
+    const messages = [
+      "Analyzing your profile...",
+      "Matching against target role...",
+      "Identifying skill gaps...",
+      "Generating interview questions...",
+      "Building your preparation roadmap...",
+      "Still working... free AI models can take a little longer."
+    ];
+
+    let index = 0;
+
+    setLoadingMessage(messages[0]);
+
+    const interval = setInterval(() => {
+      index++;
+
+      if (index < messages.length) {
+        setLoadingMessage(messages[index]);
+      }
+    }, 4000);
+
+    try {
+      await generateReport({
+        jobDescription,
+        selfDescription,
+        resumeFile,
+      });
+    } finally {
+      clearInterval(interval);
+      setLoadingMessage("");
+    }
   };
+
+
   useEffect(() => {
     setReports([])
     getAllReports()
@@ -49,17 +101,17 @@ export default function Home() {
 
     <div className="relative min-h-screen flex flex-col bg-[#0b0f19] px-4 py-10 md:py-16 overflow-x-hidden">
 
-    {/* Glow */}
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute w-100 h-100 bg-indigo-600/15 blur-[100px] rounded-full -top-25 -left-25" />
         <div className="absolute w-87.5 h-87.5 bg-purple-600/15 blur-[100px] rounded-full -top-20 -right-20" />
 
-    </div>
+      </div>
 
       {/* Hero Section */}
       <motion.div className="flex flex-col items-center justify-center text-center px-4 py-20" initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}>
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}>
 
         <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-indigo-300 via-white to-purple-300 bg-clip-text text-transparent mb-4">
           Crack Your Next Interview with AI
@@ -86,7 +138,7 @@ export default function Home() {
       <div className="h-px w-full max-w-4xl mx-auto bg-linear-to-r from-transparent via-white/10 to-transparent my-12"></div>
 
       <motion.div id="form-section" ref={formRef} className="mt-10 md:mt-16 flex justify-center" initial={{ opacity: 0, y: 30 }}
-        whileInView ={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}      >
         {/* Card */}
@@ -143,7 +195,7 @@ export default function Home() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
-                  >
+                >
 
                   <div>
                     <h2 className="text-lg font-semibold text-gray-200 mb-2 flex items-center gap-2">
@@ -277,6 +329,11 @@ export default function Home() {
 
                       {loading ? "Generating..." : "Generate My Plan"}
                     </button>
+                    {loading && (
+                      <p className="mt-3 text-center text-sm md:text-base text-indigo-300 animate-pulse">
+                        {loadingMessage}
+                      </p>
+                    )}
 
                   </div>
 
@@ -331,13 +388,13 @@ export default function Home() {
           ) : (
             /* LIST */
             <div className="space-y-3">
-              {reports.map((report,i) => (
+              {reports.map((report, i) => (
                 <motion.div
                   key={report._id}
                   initial={{ opacity: 0, y: 10 }}
-                  whileInView ={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  viewport={{once: true}}
+                  viewport={{ once: true }}
                   onClick={() => navigate(`/interview/${report._id}`)}
                   className="p-4 bg-white/5 border border-white/10 rounded-xl cursor-pointer transition-all hover:border-indigo-400/30 hover:-translate-y-px hover:shadow-md hover:scale-[1.01] duration-200"
                 >
