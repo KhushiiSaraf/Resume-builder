@@ -29,20 +29,6 @@ export default function Home() {
 
   const { user } = useAuth()
 
-  // const handleGenerateReport = async (e) => {
-  //   e.preventDefault();
-
-  //   const resumeFile = resumeInputRef.current?.files?.[0];
-
-  //   if (!resumeFile && !selfDescription.trim()) {
-  //     setValidationError("Please upload a resume or provide your self-description.");
-  //     return;
-  //   }
-
-  //   setValidationError("");
-  //   await generateReport({ jobDescription, selfDescription, resumeFile });
-  // };
-
   const handleGenerateReport = async (e) => {
     e.preventDefault();
 
@@ -62,8 +48,10 @@ export default function Home() {
       "Matching against target role...",
       "Identifying skill gaps...",
       "Generating interview questions...",
+      "Generating behavioral insights...",
       "Building your preparation roadmap...",
-      "Still working... free AI models can take a little longer."
+      "Finalizing your personalized plan...",
+      "Still working on it, good things take time...",
     ];
 
     let index = 0;
@@ -76,7 +64,7 @@ export default function Home() {
       if (index < messages.length) {
         setLoadingMessage(messages[index]);
       }
-    }, 4000);
+    }, 5000);
 
     try {
       await generateReport({
