@@ -25,12 +25,14 @@ Important Instructions:
 - Even if match score is low, still generate relevant technical questions based on JD so candidate knows what to prepare
 - Behavioral questions should be relevant to the role
 - Title MUST be extracted from the job description
+- Title field contains ONLY the job title like "Software Engineer Intern" or "Full Stack Developer"
 - Always generate at least 5 technical questions, 5 behavioral questions, these questions can be more than 5 if the job description is very broad and requires diverse skills
 - Always generate a preparation plan based on the severity and number of skill gaps
 - If skill gaps are low severity, generate a 3-5 day plan
 - If skill gaps are medium severity, generate a 7-10 day plan  
 - If skill gaps are high severity, generate a 14-21 day plan
 - Plan should be practical and actionable, with specific tasks for each day that the candidate can follow to prepare effectively for the interview.
+- All other fields must be properly filled based on the analysis
 `
 
     const response = await ai.models.generateContent({
@@ -42,7 +44,7 @@ Important Instructions:
             type: "object",
             properties: {
                 matchScore: { type: "number", description: "Score 0-100 matching candidate to job" },
-                title: { type: "string", description: "Job title" },
+                title: { type: "string", description: "ONLY the job title, maximum 5 words." },
                 skillGaps: {
                     type: "array",
                     items: {
